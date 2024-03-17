@@ -38,12 +38,12 @@ jakoś pomóc. Ewentualna pomoc
 
 ### Dane do hostów:
 
-Yuliia	20.61.0.25
-Przemysław	20.61.0.30
-Paulina	20.61.0.42
-Robert	20.61.0.165
-Katarzyna	20.61.0.194
-Miłosz	20.61.0.201
-Norbert	20.61.0.178
-Bartosz	20.61.0.218
-Robert	20.61.1.0
+- Yuliia	20.61.0.25
+- Przemysław	20.61.0.30
+- Paulina	20.61.0.42
+- Robert Pi.	20.61.0.165
+- Katarzyna	20.61.0.194
+- Miłosz	20.61.0.201
+- Norbert	20.61.0.178
+- Bartosz	20.61.0.218
+- Robert Pa.	20.61.1.0
