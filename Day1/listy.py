@@ -12,7 +12,7 @@ def print_hi(name):
 if __name__ == '__main__':
     print_hi('Pyton Kurs')
 
-    lista = [0, 1, 2]
+    lista = [0, 1, 2,3, 4,5]
     lista2 = list()
     lista.append(1)
 
@@ -21,6 +21,9 @@ if __name__ == '__main__':
     print(lista[0])
     print(lista[1:3])
     print(lista[-1])
+    print(lista[:3])
+    print(lista[2:])
+
 
     for element in lista:
         print(element)
@@ -44,6 +47,8 @@ if __name__ == '__main__':
 
     lista = [0, 1, 2]
     lista2 = [3, 4, 5]
+
+    lista[0] = 10
 
     # for el in lista2:
     #     lista.append(el)
@@ -112,5 +117,56 @@ if __name__ == '__main__':
     # wszystkie pliki i katalogi zawierajace w nazwie szukaną frazę - wraz ze ścieżkami.
     # Wyszukiwarka ma być nieczuła na wielkość liter
 
-    folder_startowy = "."
+    folder_startowy = "E:\PythonKurs_18_03_2024"
     szukna_fraze = ".txt"
+
+    znalezione_elementy = []
+    fraza = szukna_fraze.lower()
+
+    for root, dirs, files in os.walk(folder_startowy):
+        for element in dirs + files:
+            if fraza in element.lower():
+                znalezione_elementy.append(os.path.join(root, element))
+
+    print(znalezione_elementy)
+
+
+    # fraza = fraza.lower()
+    # znalezione_elementy = [os.path.join(root, element)
+    #                        for root, dirs, files in os.walk(folder_startowy)
+    #                        for element in dirs + files
+    #                        if fraza in element.lower()]
+
+
+    ############################### Krotki - tuple
+    krotka = ("Wojtek", 31, 5.0)
+    print(krotka)
+    print(krotka[0])
+
+    # krotka[0] = "Jan" # bedzie bład
+
+    def funkcja():
+        return "wynik", 321, "sciekza"
+
+    w = funkcja()
+    print(f'{w} , Typ: {type(w)}')
+
+    napis, liczba, sciezka = funkcja()
+    liczba += 1
+    # w[1] += 1
+
+    krotka = tuple(random.randint(0, 10) for i in range(10))
+
+    generator = (random.randint(0, 10) for i in range(10))
+
+    print(krotka)
+    lista_z_krotki = list(krotka)
+    print(lista_z_krotki)
+    krotka_z_listy = tuple(lista_z_krotki)
+    print(krotka_z_listy)
+
+
+
+
+
+
