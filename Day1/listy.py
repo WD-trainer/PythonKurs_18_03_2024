@@ -58,7 +58,8 @@ if __name__ == '__main__':
     print(random_list_comp)
 
     # Napisz kod który umieści w liście 10 kolejnych potęg liczby 2 uzywajac list składanych. 2 ** 2 = 4, 2 ** 3 = 8
-
+    power_of_2 = [2 ** i for i in range(10)]
+    print(power_of_2)
 
 
 
