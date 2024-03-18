@@ -40,3 +40,9 @@ if __name__ == '__main__':
     zastosuj_dla_wszystkich(tytul, 'siała', 'baba', 'mak', )
 
     # Stwórz funkcję która wydrukuje na konsoli sumę wartości przekazanych do niej jako *args
+
+    def moja_suma(*liczby):
+
+
+    suma = moja_suma(1,2,3,4,5,15,18,50)
+    print(suma)
