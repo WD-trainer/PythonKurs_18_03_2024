@@ -194,10 +194,30 @@ if __name__ == '__main__':
     # od przekazanego parametru wywołuj odpowiednią
 
     def generuj_liczby(start: int, koniec: int, parzyste: bool = True) -> list[int]:
+        def parzysta(x: int) -> bool:
+            return x % 2 == 0
+
+        def nieparzysta(x: int) -> bool:
+            return x % 2 == 1
+
+        list_liczba = []
+        for i in range(start, koniec):
+            if parzyste and parzysta(i):
+                list_liczba.append(i)
+            elif not parzyste and nieparzysta(i):
+                list_liczba.append(i)
+
+        return list_liczba
 
 
+    print(generuj_liczby(0, 20, parzyste=False))
 
+    print(generuj_liczby(parzyste=True, koniec=100, start=10))
 
+    print(generuj_liczby(10, parzyste=True, koniec=100))
+    print(generuj_liczby(10, 100, True))
+
+    # print(generuj_liczby( parzyste=True, 10, 100))
 
 
 
@@ -222,6 +242,18 @@ if __name__ == '__main__':
     # print(koniec - poczatek)
 
 
+    @functools.lru_cache()
+    def fibonacci(num):
+        print(f"Calculating fibonacci({num})")
+        if num < 2:
+            return num
+        return fibonacci(num - 1) + fibonacci(num - 2)
+
+
+    poczatek = datetime.now()
+    fibonacci(10)
+    koniec = datetime.now()
+    print(f'Fibonnaci time: {koniec - poczatek}')
 
 
 
@@ -231,9 +263,21 @@ if __name__ == '__main__':
 
 
 
-    # @functools.lru_cache()
-    # def fibonacci(num):
-    #     print(f"Calculating fibonacci({num})")
-    #     if num < 2:
-    #         return num
-    #     return fibonacci(num - 1) + fibonacci(num - 2)
+    # Using a Python dictionary to act as an adjacency list
+    graph = {
+        '5': ['3', '7'],
+        '3': ['2', '4'],
+        '7': ['8'],
+        '2': [],
+        '4': ['8'],
+        '8': []
+    }
+
+    visited = set()  # Set to keep track of visited nodes of graph.
+
+    def dfs(visited, graph, node):  # function for dfs
+        if node not in visited:
+            print(node)
+            visited.add(node)
+            for neighbour in graph[node]:
+                dfs(visited, graph, neighbour)
