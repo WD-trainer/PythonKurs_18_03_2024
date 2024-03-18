@@ -62,6 +62,9 @@ if __name__ == '__main__':
     def my_sum(a, b, c):
         print(a + b + c)
 
+    slownik = {"a" : 4, "b": 3, "c": 2}
+    my_sum(**slownik)
+
     print(my_sum(*list1))    # my_sum(1,2,3)
     print(moja_suma(*list1, *list2, *list3))
 
