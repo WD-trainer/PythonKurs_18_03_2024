@@ -47,9 +47,11 @@ if __name__ == '__main__':
 
     # for el in lista2:
     #     lista.append(el)
+    lista.extend(lista2)
 
     joined_list = lista + lista2
     print(joined_list)
+
 
     joined_list.remove(3)
     print(lista)
@@ -61,6 +63,54 @@ if __name__ == '__main__':
     power_of_2 = [2 ** i for i in range(10)]
     print(power_of_2)
 
+    power_of_2 = [(i, 2 ** i) for i in range(10)]
+    print(power_of_2)
+
+    lista = [0, 1, 2]
+    lista2 = [3, 4, 5]
+
+    lista_list = [lista, lista2]
+    print(lista_list)
+    pierwszy_element_pierwszej_listy = lista_list[0][0]
+    print(pierwszy_element_pierwszej_listy)
+
+    lista_zagniezdzone = [[[1], [2]]]
+
+    poszukiwani = ["Michael Scofield", "Lincoln Burrows", "TheodoreBagwell", "Uczciwy polityk", "Andrzej Klusiewicz"]
+    if ("Andrzej Klusiewicz" in poszukiwani):
+        print("pszypau")
+    else:
+        print("nie pszypau")
 
 
+    random_list_comp_2 = [random.randint(1, 10) for i in range(10)]
+    print(f'Przed sortowaniem: {random_list_comp_2}')
+    random_list_comp_2.sort()
+    print(f'Po sortowaniu: {random_list_comp_2}')
+    random_list_comp_2.reverse()
+    print(f'Odwrotnie: {random_list_comp_2}')
 
+    random_list_comp_3 = [random.randint(1, 10) for i in range(10)]
+    posortowane = sorted(random_list_comp_3)
+    odwrotnie = sorted(random_list_comp_3, reverse=True)
+    print(posortowane)
+    print(odwrotnie)
+
+    filtorwane = [e for e in posortowane if e % 2 == 0]
+    print(filtorwane)
+
+    for root, dirs, files in os.walk(r'E:\PythonKurs_18_03_2024'):
+        print(f"{root}, {dirs}, {files}")
+
+    napis = "Litery RoZnej WIelKOSCI"
+    print(napis.lower())
+
+    # os.path.join()
+
+    # Napisz wyszukiwarkę plików która
+    # przyjmie od użytkownika szukaną frazę i katalog startowy. Wyszukiwarka ma wyswietlić
+    # wszystkie pliki i katalogi zawierajace w nazwie szukaną frazę - wraz ze ścieżkami.
+    # Wyszukiwarka ma być nieczuła na wielkość liter
+
+    folder_startowy = "."
+    szukna_fraze = ".txt"
