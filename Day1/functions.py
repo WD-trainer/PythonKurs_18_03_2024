@@ -4,6 +4,9 @@ import os
 import re
 from collections import defaultdict
 
+from datetime import datetime
+import time
+import functools
 
 
 def times2(a: int | list) -> str | int:  # Union[str, int]
@@ -137,8 +140,21 @@ if __name__ == '__main__':
     # jego wartosc, jesli jeszcze go nie ma to trzeba go bedzie dodac do pliku.
 
     def config(nazwa_pliku, **parametry):
+        wczytany_config = {}
+        with open(nazwa_pliku, mode='r', encoding='utf-8') as plik:
+            for linia in plik:
+                if linia.isspace():
+                    continue
+                klucz, wartosc = linia.split(';')
+                wczytany_config[klucz] = wartosc
 
+        for p in parametry:
+            wczytany_config[p] = parametry[p]
 
+        plik = open(nazwa_pliku, mode='w', encoding='utf-8')
+        for p in wczytany_config:
+            plik.write(f'{p};{wczytany_config[p]}\n')
+        plik.close()
 
 
     config("plik.csv", wersja=1, arg=2, argument321=3)
@@ -147,21 +163,77 @@ if __name__ == '__main__':
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+    # funckja w funkcji
 
     def zewnetrzna(x):
         def wewnetrzna(x):
             return x * 2
+
         print(wewnetrzna(x))
         return 1
+
+    zewnetrzna(x=5)
+
+
+    # funkcja zwracajaca funkcje
+    def outer(x):
+        def inner(y):
+            return x + y
+
+        return inner
+
+    dodaj_dwa = outer(2)
+    wynik = dodaj_dwa(4)
+    print(wynik)
+
+
+
+
+    # Napisz funkcje która będzie tworzyła listę liczb parzystych lub nieparzystych w danym zakresie
+    # funkcje do sprawdzenia parzystosci napisz jako funckje wewnętrzne i w zależności
+    # od przekazanego parametru wywołuj odpowiednią
+
+    def generuj_liczby(start: int, koniec: int, parzyste: bool = True) -> list[int]:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # @functools.lru_cache(maxsize=None)
+    # def czekacz():
+    #     time.sleep(1)
+    #     return 1
+    #
+    # poczatek = datetime.now()
+    # for x in range(10):
+    #     czekacz()
+    # koniec = datetime.now()
+    # print(koniec - poczatek)
+
+
+
+
+
+
+
+
+
+
+
+    # @functools.lru_cache()
+    # def fibonacci(num):
+    #     print(f"Calculating fibonacci({num})")
+    #     if num < 2:
+    #         return num
+    #     return fibonacci(num - 1) + fibonacci(num - 2)
