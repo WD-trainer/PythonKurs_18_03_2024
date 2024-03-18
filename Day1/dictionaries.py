@@ -98,8 +98,91 @@ if __name__ == '__main__':
 
     # c) Przepakuj dane ze słownika do listy i posortuj.
 
-    nazwa_pliku = ''
+    nazwa_pliku = 'text.txt'
+
+    wystapienia = {}
+    # Defining the dict
+    wystapienia2 = defaultdict(int)  # from collections import defaultdict
 
     with open(nazwa_pliku, "r", encoding='utf-8') as plik:
         for linia in plik:
-            linia_wyczyszczona = re.sub(r'\W+', ' ', linia) 
+            linia_wyczyszczona = re.sub(r'\W+', ' ', linia)
+            slowa = linia_wyczyszczona.lower().split()
+            for slowo in slowa:
+                if slowo in wystapienia:  # https://www.geeksforgeeks.org/defaultdict-in-python/
+                    wystapienia[slowo] += 1
+                else:
+                    wystapienia[slowo] = 1
+
+                wystapienia2[slowo] += 1
+
+    print(wystapienia)
+
+    posortowane_wystapienia = sorted(wystapienia.items(), key=lambda x: x[1], reverse=True)
+    posortowane_wystapienia2 = sorted(wystapienia.items(), key=operator.itemgetter(1), reverse=True)
+
+    print(posortowane_wystapienia)
+
+
+    ##########################  Lambda
+
+    # lambda argumenty : wyrażenie
+
+    p = lambda argumenty: print(argumenty)
+    p("moj napis")
+
+    liczby = [1,2,3,4,5]
+    powers = list(map(lambda x: x**2, liczby))
+    p(powers)
+
+    numbers = [1, 2, 3, 4, 5]
+    even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
+    even_numbers2 = [e for e in numbers if e % 2 == 0]
+    print(even_numbers2)
+
+    employees = [{"name": "John", "salary": 50000}, {"name": "Jane", "salary": 55000}, {"name": "Jim", "salary": 60000}]
+    highest_salary_employee = max(employees, key=lambda x: x["salary"])
+    print(highest_salary_employee)
+
+
+    # Tak nie robić !!! to juz za duzo na lambde
+    calculate = lambda x, y: x + y if x > y else x - y
+    print(calculate(5, 10))
+
+    # lepiej tak
+    def calculate(x, y):
+        if x > y:
+            return x + y
+        else:
+            return x - y
+
+    ############### Sets - zbiory / zestawy
+
+    list1 = [1, 2, 3, 4, 5, 5]
+    list2 = [4, 5, 6, 7, 8]
+
+    # Convert lists into sets
+    set1 = set(list1)
+    set2 = set(list2)
+
+    print(list1)
+    print(set1)
+
+    # Perform set operations
+    union_set = set1.union(set2)
+    intersection_set = set1.intersection(set2)
+    difference_set1 = set1.difference(set2)
+    difference_set2 = set2.difference(set1)
+    symmetric_difference_set = set1.symmetric_difference(set2)
+
+    # Display the results
+    print("Union:", union_set)
+    print("Intersection:", intersection_set)
+    print("Difference of Set 1 - Set 2:", difference_set1)
+    print("Difference of Set 2 - Set 1:", difference_set2)
+    print("Symmetric Difference:", symmetric_difference_set)
+
+
+
+
+
