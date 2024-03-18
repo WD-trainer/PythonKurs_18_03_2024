@@ -157,7 +157,15 @@ if __name__ == '__main__':
     # Dodaj dekorator który zliczy czas wykonywania tej funkcji z parametrami. Zaloguj na konsole wszystkie przekazane parametry
 
     def licz_czas_i_loguj(fun):
-        
+        def wewnetrzna(*args, **kwargs):
+            print(f'Argumenty {args}')
+            print(f'Key-word arguments {kwargs}')
+            poczatek = datetime.now()
+            value = fun(*args, **kwargs)
+            koniec = datetime.now()
+            print(f' wywolanie trwalo {koniec - poczatek}')
+            return value
+        return wewnetrzna
 
 
 
@@ -168,5 +176,7 @@ if __name__ == '__main__':
         print(f"Robie ciekawe rzeczy w Pythonie {napis_do_wypisania}")
         return 0
 
+    returned_value = opakuj_mnie_z_parametrami(x=1, napis_do_wypisania="jestem cool")
 
-    opakuj_mnie_z_parametrami(x=1, napis_do_wypisania="jestem cool")
+
+    # dodatkowe materiały o dekoratorach [ENG] https://realpython.com/primer-on-python-decorators/#more-real-world-examples
