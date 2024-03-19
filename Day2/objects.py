@@ -82,7 +82,6 @@ class Circle:
     def __init__(self, radius):
         self._radius = radius
 
-    #@property
     def _get_radius(self):
         print("Get radius")
         return self._radius
@@ -137,6 +136,57 @@ print(f'Rectangle {r.a}, {r.b}')
 # Wzrost jest atrybutem chronionym (__wzrost)
 # Waga może być zmieniana ale też jako atrybut z wykorzystaniem dekoratora @property
 # wzor na bmi = masa / (wzrost ** 2)   wzrost podany w metrach 1.84
+class Zawodnik:
+
+    def __init__(self, wzrost: float, masa: float, imie: str, auto: Samochod = Samochod("Opel", "Vectra", "SJZ 11111")):
+        self.__wzrost = wzrost
+        self._masa = masa
+        self._imie = imie
+        self.auto = auto
+
+    @property
+    def BMI(self):
+        return self._masa / (self.__wzrost ** 2)
+
+    @property
+    def waga(self):
+        return self._masa
+
+    @waga.setter
+    def waga(self, value: float):
+        self._masa = value
+
+
+    # "180;180;Jan"
+    @classmethod
+    def create_from_string(cls, text: str):
+        dane = text.strip().split(';')
+        if len(dane) == 3:
+            wzorst_cm, waga_lbs, imie = dane
+            z = cls(wzrost=int(wzorst_cm) / 100, masa=int(waga_lbs) * 0.454, imie=imie)
+            return z
+
+    @staticmethod
+    def nie_uzywam_atrybutow(info:str):
+        print(info)
+
+    # odczytali dane z pliku dane.txt
+    # zbudowali sobie liste zawodnikow (jako obietky klasy) przy uzyciu  @classmethod
+    
 
 
 
+
+nowy_zawodnik_z_napisu = Zawodnik.create_from_string("180;180;Jan")
+nowy_zawodnik_z_napisu.nie_uzywam_atrybutow("Przykładowy tekst")
+
+z1 = Zawodnik(1.80, 75, "Adam", Samochod("Opel", "Astra", "SJZ 22222"))
+# print(z1)
+z2 = Zawodnik(1.85, 80, "Adam")
+# print(z2)
+
+print(f"BMI: {z2.BMI:.2f}")
+
+z2.waga = 75
+print(f"Schudłem:")
+print(f"BMI: {z2.BMI:.2f}")
