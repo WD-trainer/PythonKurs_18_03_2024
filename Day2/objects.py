@@ -1,6 +1,8 @@
 from timeit import default_timer as timer
 import time
 
+from abc import ABC, abstractmethod
+
 
 
 class Osoba:
@@ -107,7 +109,7 @@ print(kolo.radius)
 
 try:
     kolo.radius = 30
-except Exceptionas err:
+except Exception as err:
     print(err)
 
 
@@ -179,7 +181,7 @@ class Zawodnik:
     @classmethod
     def create_from_file(cls, path_to_file: str):
         zawodnicy = []
-        with open("dane.txt", "r") as plik:
+        with open(path_to_file, "r") as plik:
             for linia in plik:
                 dane = linia.strip().split(";")
                 if len(dane) == 3:
@@ -320,7 +322,7 @@ for zwierze in lista_zwierzat:
     print(zwierze)
 
 
-from abc import ABC, abstractmethod
+# from abc import ABC, abstractmethod
 
 class Rysuje(ABC):
     @abstractmethod
@@ -340,7 +342,16 @@ class Figura(ABC):
 
 
 class Kwadrat(Figura, Rysuje):
+    """
+    Tutaj opisujemy generalnie co robi nasza klasa
+    """
     def __init__(self, dlugosc_boku: int):
+        """
+
+        Parameters
+        ----------
+        dlugosc_boku
+        """
         super().__init__('Kwadrat')
         self.dlugosc_boku=dlugosc_boku
 
@@ -351,6 +362,19 @@ class Kwadrat(Figura, Rysuje):
         print("**")
         print("**")
 
+class Prostokat(Figura):   ## UWAGA prostokat nie dziedzy interfejsu Rysuje
+    def __init__(self,bok_a,bok_b):
+        super().__init__('Prostokąt')
+        self.bok_a=bok_a
+        self.bok_b=bok_b
+    def oblicz_pole(self):
+        return self.bok_a*self.bok_b
+
+
+figury =  [Prostokat(2,3), Kwadrat(50), Prostokat(6,8)]
+for f in figury:
+    f.pokaz_nazwe()
+    print(f.oblicz_pole())
 
 
 # Stwórz klasę abstrakcyjną Restauracja która będzie posiadała abstrakcyjną metodę "serwuj_danie".
@@ -358,4 +382,49 @@ class Kwadrat(Figura, Rysuje):
 # Wymuś posiadanie implementacji metody abstrakcyjnej "serwuj_danie" we wszystkich
 # tych klasach ale o różnej implementacji. Powołaj do życia obiekty tych klas,
 # a następnie na rzecz każdego z tych obiektów wywołaj funkcję serwuj_danie.
+class Restauracja(ABC):
+    @abstractmethod
+    def serwuj_danie(self):
+
+        pass
+
+
+class RestauracjaChinska(Restauracja):
+
+    def serwuj_danie(self):
+        print("Restauracja chińska serwuje danie: Kaczka po pekińsku")
+
+
+class RestauracjaWloska(Restauracja):
+    def serwuj_danie(self):
+        print("Restauracja włoska serwuje danie: Spaghetti Bolognese")
+
+class RestauracjaPolska(Restauracja):
+    def serwuj_danie(self):
+        print("Restauracja polska serwuje danie: Bigos")
+
+
+
+lista_restauracji = [RestauracjaChinska(), RestauracjaWloska(), RestauracjaPolska()]
+
+for rest in lista_restauracji:
+    rest.serwuj_danie()
+
+
+# import torch
+# import torch.nn as nn
+#
+# class CustomModule(nn.Module):
+#     def __init__(self, input_dim, output_dim):
+#         super(CustomModule, self).__init__()
+#         self.linear = nn.Linear(input_dim, output_dim)
+#
+#     def forward(self, x):
+#         return self.linear(x)
+#
+# # Użycie klasy CustomModule
+# module = CustomModule(input_dim=10, output_dim=5)
+
+
+from pandas import DataFrame
 
