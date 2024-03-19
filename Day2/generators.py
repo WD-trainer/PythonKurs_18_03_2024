@@ -73,7 +73,11 @@ print(next(genrator))
 
 #     Stwórz generator który będzie podawał nieskończenie wiele liczb parzystych.
 #     Przetestuj go pobierając z niego kolejne wartości i wyświetlając je na konsoli.
-
+def generator_parzysty():
+    i = 0
+    while True:
+        yield i
+        i += 2
 
 
 
@@ -81,3 +85,23 @@ for i in generator_parzysty():
     print(i)
     if i > 20:
         break
+
+
+
+def read_lines_in_batches(file_path, batch_size=10):
+    with open(file_path) as file:
+        while True:
+            batch = []
+            for _ in range(batch_size):
+                line = file.readline()
+                if not line:
+                    break
+                batch.append(line.strip())
+            if not batch:
+                break
+            yield batch
+
+
+file = r'../Day1/text.txt'
+for batch in read_lines_in_batches(file):
+    print(batch)
