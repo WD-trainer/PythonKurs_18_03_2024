@@ -1,4 +1,4 @@
-
+import time
 
 
 def elementy():
@@ -58,10 +58,14 @@ for i in generator_potegi:
 
 #  Stworz generator ktory bedzie przyjmowal przez parametr ilosc elementow a nastepnie zwracal elementy o tresci
 #  'element o indeksie x'( gdzie x bedzie numerem podawanego elementu) czekajac 1 sekunde przed zwrotem kazdego elementu.
+def generator_elementow(ilosc: int):
+    for i in range(ilosc):
+        time.sleep(1)
+        yield f'element o indeksie {i}'
+        # yield print(f'element o indeksie {i}')
 
 
-
-genrator = generator_elementów(3)
+genrator = generator_elementow(3)
 print(next(genrator))
 next(genrator)
 print(next(genrator))
@@ -69,6 +73,8 @@ print(next(genrator))
 
 #     Stwórz generator który będzie podawał nieskończenie wiele liczb parzystych.
 #     Przetestuj go pobierając z niego kolejne wartości i wyświetlając je na konsoli.
+
+
 
 
 for i in generator_parzysty():
