@@ -1,3 +1,6 @@
+from timeit import default_timer as timer
+
+
 
 class Osoba:
     # imie = 'Andrzej'
@@ -172,10 +175,24 @@ class Zawodnik:
 
     # odczytali dane z pliku dane.txt
     # zbudowali sobie liste zawodnikow (jako obietky klasy) przy uzyciu  @classmethod
-    
+    @classmethod
+    def create_from_file(cls, path_to_file: str):
+        zawodnicy = []
+        with open("dane.txt", "r") as plik:
+            for linia in plik:
+                dane = linia.strip().split(";")
+                if len(dane) == 3:
+                    imie, waga, wzrost = dane
+                    zawodnicy.append(cls(masa=float(waga), wzrost=float(wzrost), imie=imie))
+        return zawodnicy
+
+
+    ## napisz funkcje __lt__ umożliwojącą sortowanie zawodników po BMI
+    # uruchom tą funkcję z danymi wczytanymi z pliku i wypisz na konsoli imie zawodnika i jego BMI (użyj metody __str__)
 
 
 
+zawodnicy_lista = Zawodnik.create_from_file("dane.txt")
 
 nowy_zawodnik_z_napisu = Zawodnik.create_from_string("180;180;Jan")
 nowy_zawodnik_z_napisu.nie_uzywam_atrybutow("Przykładowy tekst")
@@ -190,3 +207,7 @@ print(f"BMI: {z2.BMI:.2f}")
 z2.waga = 75
 print(f"Schudłem:")
 print(f"BMI: {z2.BMI:.2f}")
+
+
+
+###### Magic method page ---> https://realpython.com/python-magic-methods/
