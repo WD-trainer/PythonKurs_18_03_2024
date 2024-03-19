@@ -71,4 +71,20 @@ printer("Drugi dzien szkolenia, jest ekstra!")
 
 
 # Napisz dekorator ktory z parametrem sleep_time ktory bedzie wywoływał funkcję sleep przed wykonaniem funkcji dekorowanej
+def sleeper(sleep_time: float):
+    def sleeper_decorator(func):
+        def inner(*args, **kwargs):
+            time.sleep(sleep_time)
+            returned_value = func(*args, **kwargs)
+            return returned_value
+        return inner
+    return sleeper_decorator
 
+
+
+@sleeper(sleep_time=2.5)
+def slow_add(a: float, b: float) -> float:
+    return a + b
+
+print(f'Wynik dodawania 2+2=')
+print(f'{slow_add(2, 2)}')
