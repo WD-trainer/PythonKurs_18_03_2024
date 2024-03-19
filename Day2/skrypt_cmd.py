@@ -14,7 +14,8 @@
 #     hello()
 
 import os
-import click
+import click ### https://github.com/pallets/click
+### https://click.palletsprojects.com/en/8.1.x/
 
 #opakuj ponizsza funkcje przy uzyciu bibloteki click
 def znajdz_pliki_i_katalogi(katalog_startowy, fraza):
