@@ -1,4 +1,5 @@
 from timeit import default_timer as timer
+import time
 
 
 
@@ -187,12 +188,21 @@ class Zawodnik:
         return zawodnicy
 
 
+    def __str__(self):
+        return f"{self._imie}: BMI = {self.BMI:.2f}"
+
     ## napisz funkcje __lt__ umożliwojącą sortowanie zawodników po BMI
     # uruchom tą funkcję z danymi wczytanymi z pliku i wypisz na konsoli imie zawodnika i jego BMI (użyj metody __str__)
-
+    def __lt__(self, other):
+        return self.BMI < other.BMI
 
 
 zawodnicy_lista = Zawodnik.create_from_file("dane.txt")
+# zawodnicy_lista.append("napis")
+zawodnicy_lista.sort()
+for z in zawodnicy_lista:
+    print(z)
+
 
 nowy_zawodnik_z_napisu = Zawodnik.create_from_string("180;180;Jan")
 nowy_zawodnik_z_napisu.nie_uzywam_atrybutow("Przykładowy tekst")
@@ -211,3 +221,32 @@ print(f"BMI: {z2.BMI:.2f}")
 
 
 ###### Magic method page ---> https://realpython.com/python-magic-methods/
+
+
+
+##### Context menager ---> # https://realpython.com/python-with-statement/
+
+# Napisz klase Timer która będzie mierzyła czas wykonania funkcji jako context menager.
+# klasa ta w zaleznosci od zmiennej verbose bedzie wypisywała na ekran czas wykonania przy wyjsciu z contextu
+# from timeit import default_timer as timer
+class Timer(object):
+    def __init__(self, verbose=False):
+        self.timer = timer
+        self.elapsed = 0
+        #czas = self.timer()
+
+    def __enter__(self):
+        
+        return self
+
+    def __exit__(self, *args):
+
+
+
+
+with Timer() as t:
+    time.sleep(3)
+    print("Moja bardzo długa funkcja")
+
+
+print(f'Ta funkcja trwała {t.elapsed}')
