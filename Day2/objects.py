@@ -107,7 +107,7 @@ print(kolo.radius)
 
 try:
     kolo.radius = 30
-except Exception as err:
+except Exceptionas err:
     print(err)
 
 
@@ -233,20 +233,129 @@ class Timer(object):
     def __init__(self, verbose=False):
         self.timer = timer
         self.elapsed = 0
-        #czas = self.timer()
+        self.verbose = verbose
 
     def __enter__(self):
-        
+        self.start = self.timer()
         return self
 
     def __exit__(self, *args):
+        end = self.timer()
+        self.elapsed_secs = end - self.start
+        self.elapsed = self.elapsed_secs * 1000  # milliseconds
+        if self.verbose:
+            print('elapsed time: %f ms' % self.elapsed)
 
 
 
-
-with Timer() as t:
-    time.sleep(3)
+with Timer(verbose=True) as t:
+    # time.sleep(3)
     print("Moja bardzo długa funkcja")
 
 
 print(f'Ta funkcja trwała {t.elapsed}')
+
+
+
+#################################################### CWICZENIE DODATKOWE
+
+# Stwórz klasę Ustawienia która będzie w momencie tworzenia obiektu czytac plik ustawienia.csv o treści:
+# encoding;utf-8
+# language;pl
+# timezone;-2
+# Dane te mają zostać wczytane do wewnętrznego słownika tak, by pierwsza kolumna stanowila klucze a druga wartosci.
+# Obiekt ma umożliwiać sprawdzanie ustawień w ten sposób:
+# u=Ustawienia()
+# print( u['encoding'] )
+# Obiekt ma umożliwiać też ustawienie wartości na zasadzie u[‘nazwa’]=’wartosc’.
+# W przypadku zmiany powinna ona dotyczyć również zawartości pliku.
+
+#################################################### CWICZENIE DODATKOWE
+
+
+
+
+
+
+
+#################################################### Dziedziczenie
+
+class Animal(object):
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        print(f"{self.name} makes a sound")
+
+    def eat(self):
+        print("eating")
+
+    def __str__(self):
+        return f'My name is {self.name}'
+
+class Dog(Animal):
+    def speak(self):
+        print(f"{self.name} barks")
+
+
+class Cat(Animal):
+    def speak(self):
+        print(f"{self.name} meows")
+
+
+animal = Animal("Generic Animal")
+dog = Dog("Buddy")
+cat = Cat("Whiskers")
+
+animal.speak()
+dog.speak()
+cat.speak()
+cat.eat()
+
+lista_zwierzat = [cat, dog]
+
+for zwierze in lista_zwierzat:
+    # zwierze.speak()
+    # zwierze.eat()
+    print(zwierze)
+
+
+from abc import ABC, abstractmethod
+
+class Rysuje(ABC):
+    @abstractmethod
+    def narysuje_mnie(self):
+        pass
+
+
+class Figura(ABC):
+    def __init__(self, nazwa):
+        self.nazwa = nazwa
+    def pokaz_nazwe(self):
+        print(self.nazwa)
+
+    @abstractmethod
+    def oblicz_pole(self):
+        pass
+
+
+class Kwadrat(Figura, Rysuje):
+    def __init__(self, dlugosc_boku: int):
+        super().__init__('Kwadrat')
+        self.dlugosc_boku=dlugosc_boku
+
+    def oblicz_pole(self):
+        return pow(self.dlugosc_boku, 2)
+
+    def narysuje_mnie(self):
+        print("**")
+        print("**")
+
+
+
+# Stwórz klasę abstrakcyjną Restauracja która będzie posiadała abstrakcyjną metodę "serwuj_danie".
+# Stwórz klasy "RestauracjaChinska", "RestauracjaWloska" i "RestaruracjaPolska".
+# Wymuś posiadanie implementacji metody abstrakcyjnej "serwuj_danie" we wszystkich
+# tych klasach ale o różnej implementacji. Powołaj do życia obiekty tych klas,
+# a następnie na rzecz każdego z tych obiektów wywołaj funkcję serwuj_danie.
+
