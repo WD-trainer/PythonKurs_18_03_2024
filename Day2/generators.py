@@ -1,17 +1,11 @@
 
 
 
-
-
-
-
-
-
-
 def elementy():
     yield 'element numer 1'
     yield 'element numer 2'
     yield 'element numer 3'
+    print("Cos w generatorze")
     yield 'element numer 4'
 
 
@@ -21,7 +15,7 @@ for e in elementy():
     print(e)
 
 
-def potegi2(n):
+def potegi2(n:int):
     for x in range(1, n + 1):
         yield pow(2, x)
 
@@ -43,7 +37,7 @@ print(dz.__next__())
 print(dz.__next__())
 
 potegi22 = [2 ** i for i in range(100)]
-generator_potegi = (2 ** i for i in range(100000))
+generator_potegi = (2 ** i for i in range(1000000))
 print(generator_potegi)
 next(generator_potegi)
 generator_potegi.__next__()
@@ -58,6 +52,9 @@ for i in generator_potegi:
 
 # for i in dziesieci():
 #     print(i)
+
+################################### f-string resources ####################################################
+#http://cissandbox.bentley.edu/sandbox/wp-content/uploads/2022-02-10-Documentation-on-f-strings-Updated.pdf
 
 #  Stworz generator ktory bedzie przyjmowal przez parametr ilosc elementow a nastepnie zwracal elementy o tresci
 #  'element o indeksie x'( gdzie x bedzie numerem podawanego elementu) czekajac 1 sekunde przed zwrotem kazdego elementu.
