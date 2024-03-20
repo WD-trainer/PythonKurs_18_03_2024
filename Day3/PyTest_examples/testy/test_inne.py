@@ -14,7 +14,7 @@ def test_czy_to_dziala():
     assert 1 == 2
 
 
-@pytest.mark.bardzo_wolne
-def test_ktory_potrzebuje_czasu():
-    time.sleep(5)
-    assert 1 == 1
+# @pytest.mark.bardzo_wolne
+# def test_ktory_potrzebuje_czasu():
+#     time.sleep(5)
+#     assert 1 == 1
