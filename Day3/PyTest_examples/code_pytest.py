@@ -74,3 +74,6 @@ def getData():
 def getOne(index: int):
     global baza
     return baza[index]
+
+
+# print(sumuj([1,2], [3,4]))
