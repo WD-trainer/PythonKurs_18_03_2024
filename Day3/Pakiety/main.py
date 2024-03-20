@@ -20,7 +20,7 @@ from wypisywacz.pisacz import hello_world
 # W tym module dopisz funkcje walidacji danych dla funkcji BMI - czy waga < 200 i 1.00 < wzrost < 2.50. Jesli warunek nie jest spelniony
 # rzuc wyjatkiem Value error.
 # W pliku __init__.py ustaw zmienna __all__ tak aby tylko funkcja liczac BMI byla widoczna po imporcie pakietu
-
+import BodyMassIndex as bmi
 
 
 if __name__ == "__main__":
@@ -32,3 +32,12 @@ if __name__ == "__main__":
     #print_hi("Jan")
 
     # print(podPakiet.functions.times3(3))
+
+    try:
+        height = [2.11, 1.80]
+        weight = [100, 400]
+        for h, w in zip(height, weight):
+            bmi_result = bmi.calculate_bmi(h, w)
+            print("Your BMI is:", bmi_result)
+    except ValueError as e:
+        print("Error:", e)
