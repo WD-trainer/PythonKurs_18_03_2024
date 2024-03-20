@@ -9,7 +9,6 @@ def dajCyfry() -> list[int]:
 
 
 
-
 def fetch_data():
     response = requests.get("https://example.com/api/data")
     return response.text
