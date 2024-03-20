@@ -1,7 +1,7 @@
 import os
 
 import requests
-from dotenv import load_dotenv
+from dotenv_example import load_dotenv
 import fire
 
 def search_training(keyword: str):
